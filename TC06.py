@@ -26,6 +26,8 @@ try:
     driver.find_element(By.XPATH, "//button[text()='Sign In']").click()
     time.sleep(5)
 
+    # chờ 5s
+    wait = WebDriverWait(driver, 5)
     # Tìm input combobox bằng thuộc tính aria-label
     combo_input = wait.until(EC.element_to_be_clickable((
         By.XPATH, "//input[@role='combobox' and @aria-label='Specify the search value for Is Deleted field']"
@@ -41,6 +43,21 @@ try:
     # chọn sách  vi tri thu 1
     checkbox = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[2]")  # checkbox thứ 2
     checkbox.click()
+    time.sleep(5)
+
+    # Đợi ô số lượng (5s) xuất hiện và có thể tương tác
+    wait = WebDriverWait(driver, 5)
+    quantity_input = wait.until(EC.element_to_be_clickable((
+        By.XPATH, "//input[@aria-label='Specify the search value for Quantity field']"
+    )))
+
+    #Nhập 0 và nhấn Enter
+    quantity_input.clear()
+    quantity_input.send_keys("0")
+    quantity_input.send_keys(Keys.ENTER)
+    # chọn sách  vi tri thu 1
+    checkboxFalse = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[2]")  # checkbox thứ 2
+    checkboxFalse.click()
     time.sleep(5)
 
     # click button order

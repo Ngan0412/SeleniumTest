@@ -15,16 +15,16 @@ driver = webdriver.Edge(service=service)
 try:
     # vào trang đăng nhập
     driver.get("https://localhost:7226/")
-    time.sleep(1)
+    time.sleep(3)
 
     # Điền thông tin đăng nhập
     driver.find_element(By.ID, "email").send_keys("phucnaoto@gmail.com")
     driver.find_element(By.ID, "password").send_keys("123456")
-    time.sleep(1)
+    time.sleep(3)
 
     # click btn login
     driver.find_element(By.XPATH, "//button[text()='Sign In']").click()
-    time.sleep(5)
+    time.sleep(10)
 
     # Tìm input combobox bằng thuộc tính aria-label
     combo_input = wait.until(EC.element_to_be_clickable((
@@ -43,16 +43,17 @@ try:
     checkbox.click()
     time.sleep(5)
 
+
     # click button order
     order_button = driver.find_element(By.XPATH, "//button[span[text()='Order']]")
     order_button.click()
     time.sleep(5)
      # tìm và lấy nhân viên thùy ngân
-    comboboxCustomer = driver.find_element(By.XPATH, "//input[@name='CustomerComboboxId']")
-    comboboxCustomer.send_keys("Thùy Ngân")
-    # Nhấn Enter để chọn
-    comboboxCustomer.send_keys(Keys.ENTER)
-    time.sleep(5)
+    # comboboxCustomer = driver.find_element(By.XPATH, "//input[@name='CustomerComboboxId']")
+    # comboboxCustomer.send_keys("Thùy Ngân")
+    # # Nhấn Enter để chọn
+    # comboboxCustomer.send_keys(Keys.ENTER)
+    # time.sleep(5)
 
      # tìm và lấy khuyến mãi mùa hè
     comboboxPromotion = driver.find_element(By.XPATH, "//input[@name='PromotionComboboxId']")
@@ -60,8 +61,6 @@ try:
     # Nhấn Enter để chọn
     comboboxPromotion.send_keys(Keys.ENTER)
     time.sleep(5)
-
-
 
     # click button save
     order_button = driver.find_element(By.XPATH, "//button[span[text()='Save']]")
@@ -71,10 +70,11 @@ try:
     WebDriverWait(driver, 5).until(
         EC.text_to_be_present_in_element(
             (By.CLASS_NAME, "custom-toast-background"),
-            "Order created successfully."
+            "Customer is invalid or has been deleted."
         )
     )
-    print("✅ Tạo thành công đơn hàng.")
+    #nếu k chạy cái đợi toast thì dòng này k đc chạy
+    print("❌ Tạo thất bại đơn hàng.")
     time.sleep(10)
 
 except Exception as e:

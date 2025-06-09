@@ -15,33 +15,21 @@ driver = webdriver.Edge(service=service)
 try:
     # vào trang đăng nhập
     driver.get("https://localhost:7226/")
-    time.sleep(1)
+    time.sleep(3)
 
     # Điền thông tin đăng nhập
     driver.find_element(By.ID, "email").send_keys("phucnaoto@gmail.com")
     driver.find_element(By.ID, "password").send_keys("123456")
-    time.sleep(1)
+    time.sleep(3)
 
     # click btn login
     driver.find_element(By.XPATH, "//button[text()='Sign In']").click()
-    time.sleep(5)
+    time.sleep(10)
 
-    # Tìm input combobox bằng thuộc tính aria-label
-    combo_input = wait.until(EC.element_to_be_clickable((
-        By.XPATH, "//input[@role='combobox' and @aria-label='Specify the search value for Is Deleted field']"
-    )))
-    combo_input.click()
-
-    # 2. Chờ mục "False" hiển thị và click chọn
-    false_option = wait.until(EC.element_to_be_clickable((
-        By.XPATH, "//*[normalize-space()='False']"
-    )))
-    false_option.click()
-    time.sleep(5)
-    # chọn sách  vi tri thu 1
-    checkbox = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[2]")  # checkbox thứ 2
-    checkbox.click()
-    time.sleep(5)
+    # chọn sách vi tri thu 3
+    # checkbox = driver.find_element(By.XPATH, "(//input[@type='checkbox'])[4]")  # checkbox thứ 4
+    # checkbox.click()
+    # time.sleep(5)
 
     # click button order
     order_button = driver.find_element(By.XPATH, "//button[span[text()='Order']]")
@@ -61,8 +49,6 @@ try:
     comboboxPromotion.send_keys(Keys.ENTER)
     time.sleep(5)
 
-
-
     # click button save
     order_button = driver.find_element(By.XPATH, "//button[span[text()='Save']]")
     order_button.click()
@@ -71,10 +57,11 @@ try:
     WebDriverWait(driver, 5).until(
         EC.text_to_be_present_in_element(
             (By.CLASS_NAME, "custom-toast-background"),
-            "Order created successfully."
+            "Order must have at least one item."
         )
     )
-    print("✅ Tạo thành công đơn hàng.")
+    #nếu k chạy cái đợi toast thì dòng này k đc chạy
+    print("❌ Tạo thất bại đơn hàng.")
     time.sleep(10)
 
 except Exception as e:

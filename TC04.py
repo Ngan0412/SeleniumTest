@@ -15,16 +15,16 @@ driver = webdriver.Edge(service=service)
 try:
     # vào trang đăng nhập
     driver.get("https://localhost:7226/")
-    time.sleep(1)
+    time.sleep(3)
 
     # Điền thông tin đăng nhập
     driver.find_element(By.ID, "email").send_keys("phucnaoto@gmail.com")
     driver.find_element(By.ID, "password").send_keys("123456")
-    time.sleep(1)
+    time.sleep(3)
 
     # click btn login
     driver.find_element(By.XPATH, "//button[text()='Sign In']").click()
-    time.sleep(5)
+    time.sleep(10)
 
     # Tìm input combobox bằng thuộc tính aria-label
     combo_input = wait.until(EC.element_to_be_clickable((
@@ -43,6 +43,7 @@ try:
     checkbox.click()
     time.sleep(5)
 
+
     # click button order
     order_button = driver.find_element(By.XPATH, "//button[span[text()='Order']]")
     order_button.click()
@@ -54,14 +55,12 @@ try:
     comboboxCustomer.send_keys(Keys.ENTER)
     time.sleep(5)
 
-     # tìm và lấy khuyến mãi mùa hè
-    comboboxPromotion = driver.find_element(By.XPATH, "//input[@name='PromotionComboboxId']")
-    comboboxPromotion.send_keys("Khuyến Mãi Mùa Hè")
-    # Nhấn Enter để chọn
-    comboboxPromotion.send_keys(Keys.ENTER)
-    time.sleep(5)
-
-
+    #  # tìm và lấy khuyến mãi mùa hè
+    # comboboxPromotion = driver.find_element(By.XPATH, "//input[@name='PromotionComboboxId']")
+    # comboboxPromotion.send_keys("Khuyến Mãi Mùa Hè")
+    # # Nhấn Enter để chọn
+    # comboboxPromotion.send_keys(Keys.ENTER)
+    # time.sleep(5)
 
     # click button save
     order_button = driver.find_element(By.XPATH, "//button[span[text()='Save']]")
@@ -74,6 +73,7 @@ try:
             "Order created successfully."
         )
     )
+    #nếu k chạy cái đợi toast thì dòng này k đc chạy
     print("✅ Tạo thành công đơn hàng.")
     time.sleep(10)
 
